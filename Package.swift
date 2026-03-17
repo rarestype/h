@@ -1,8 +1,8 @@
 // swift-tools-version:6.0
 import PackageDescription
 
-let package:Package = .init(
-    name: "swift-hash",
+let package: Package = .init(
+    name: "h",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)],
     products: [
         .library(name: "Base16", targets: ["Base16"]),
@@ -15,78 +15,101 @@ let package:Package = .init(
         .library(name: "SHA2", targets: ["SHA2"]),
         .library(name: "UUID", targets: ["UUID"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/ordo-one/dollup", from: "1.0.1"),
+    ],
     targets: [
         .target(name: "BaseDigits"),
 
-        .target(name: "Base16",
+        .target(
+            name: "Base16",
             dependencies: [
                 .target(name: "BaseDigits"),
-            ]),
+            ]
+        ),
 
-        .target(name: "Base64",
+        .target(
+            name: "Base64",
             dependencies: [
                 .target(name: "BaseDigits"),
-            ]),
+            ]
+        ),
 
-        .target(name: "CRC",
+        .target(
+            name: "CRC",
             dependencies: [
                 .target(name: "Base16"),
-            ]),
+            ]
+        ),
 
         .target(name: "InlineBuffer"),
 
-        .target(name: "MD5",
+        .target(
+            name: "MD5",
             dependencies: [
                 .target(name: "InlineBuffer"),
-            ]),
+            ]
+        ),
 
         .target(name: "MessageAuthentication"),
 
-        .target(name: "SHA1",
+        .target(
+            name: "SHA1",
             dependencies: [
                 .target(name: "InlineBuffer"),
-            ]),
+            ]
+        ),
 
-        .target(name: "SHA2",
+        .target(
+            name: "SHA2",
             dependencies: [
                 .target(name: "Base16"),
                 .target(name: "MessageAuthentication"),
-            ]),
+            ]
+        ),
 
-        .target(name: "UUID",
+        .target(
+            name: "UUID",
             dependencies: [
                 .target(name: "Base16"),
-            ]),
+            ]
+        ),
 
-        .testTarget(name: "Base64Tests",
+        .testTarget(
+            name: "Base64Tests",
             dependencies: [
                 .target(name: "Base64"),
-            ]),
+            ]
+        ),
 
-        .testTarget(name: "CRCTests",
+        .testTarget(
+            name: "CRCTests",
             dependencies: [
                 .target(name: "CRC"),
-            ]),
+            ]
+        ),
 
-        .testTarget(name: "MD5Tests",
+        .testTarget(
+            name: "MD5Tests",
             dependencies: [
                 .target(name: "MD5"),
-            ]),
+            ]
+        ),
 
-        .testTarget(name: "SHA2Tests",
+        .testTarget(
+            name: "SHA2Tests",
             dependencies: [
                 .target(name: "SHA2"),
-            ]),
+            ]
+        ),
     ]
 )
 
-for target:PackageDescription.Target in package.targets
-{
+for target: Target in package.targets {
     {
-        var settings:[PackageDescription.SwiftSetting] = $0 ?? []
+        var settings: [SwiftSetting] = $0 ?? []
 
         settings.append(.enableUpcomingFeature("ExistentialAny"))
-        settings.append(.enableExperimentalFeature("StrictConcurrency"))
 
         settings.append(.define("DEBUG", .when(configuration: .debug)))
 

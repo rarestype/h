@@ -1,13 +1,8 @@
 import BaseDigits
 
-extension Base64
-{
-    public
-    enum SafeDigits
-    {
-        @usableFromInline
-        static let ascii:[UInt8] =
-        [
+extension Base64 {
+    public enum SafeDigits {
+        @usableFromInline static let ascii: [UInt8] = [
             0x41,
             0x42,
             0x43,
@@ -75,11 +70,8 @@ extension Base64
         ]
     }
 }
-extension Base64.SafeDigits:BaseDigits
-{
-    @inlinable public
-    static subscript(remainder:UInt8) -> UInt8
-    {
+extension Base64.SafeDigits: BaseDigits {
+    @inlinable public static subscript(remainder: UInt8) -> UInt8 {
         Self.ascii[Int.init(remainder & 0b0011_1111)]
     }
 }

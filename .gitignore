@@ -1,5 +1,7 @@
-.build
-.build.ssgc
-.build.unidoc
-.vscode
-Packages/
+/.build
+/.build.ssgc
+/.build.unidoc
+/.vscode
+
+/Packages/
+/Packages.resolved

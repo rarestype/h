@@ -1,0 +1,15 @@
+{
+  "originHash" : "30fd4878f812d7296fa827e213da67c6eeaba4a5678e116b7989297e46ca6853",
+  "pins" : [
+    {
+      "identity" : "dollup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ordo-one/dollup",
+      "state" : {
+        "revision" : "066566834355532c973c2acbc4891d41b3368ae0",
+        "version" : "1.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
