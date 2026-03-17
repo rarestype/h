@@ -1,24 +1,16 @@
-extension MD5
-{
-    @frozen public
-    struct Words:Sendable
-    {
-        public
-        var a:UInt32
-        public
-        var b:UInt32
-        public
-        var c:UInt32
-        public
-        var d:UInt32
+extension MD5 {
+    @frozen public struct Words: Sendable {
+        public var a: UInt32
+        public var b: UInt32
+        public var c: UInt32
+        public var d: UInt32
 
-        @inlinable
-        init(
-            a:UInt32 = 0x6745_2301,
-            b:UInt32 = 0xefcd_ab89,
-            c:UInt32 = 0x98ba_dcfe,
-            d:UInt32 = 0x1032_5476)
-        {
+        @inlinable init(
+            a: UInt32 = 0x6745_2301,
+            b: UInt32 = 0xefcd_ab89,
+            c: UInt32 = 0x98ba_dcfe,
+            d: UInt32 = 0x1032_5476
+        ) {
             self.a = a
             self.b = b
             self.c = c
@@ -26,21 +18,17 @@ extension MD5
         }
     }
 }
-extension MD5.Words
-{
-    @inlinable
-    init(littleEndian storage:MD5.Storage)
-    {
+extension MD5.Words {
+    @inlinable init(littleEndian storage: MD5.Storage) {
         self.init(
             a: .init(littleEndian: storage.0),
             b: .init(littleEndian: storage.1),
             c: .init(littleEndian: storage.2),
-            d: .init(littleEndian: storage.3))
+            d: .init(littleEndian: storage.3)
+        )
     }
 
-    @inlinable
-    var littleEndian:MD5.Storage
-    {
+    @inlinable var littleEndian: MD5.Storage {
         (
             self.a.littleEndian,
             self.b.littleEndian,
@@ -49,19 +37,14 @@ extension MD5.Words
         )
     }
 }
-extension MD5.Words
-{
-    @usableFromInline static
-    let shifts:[Int] =
-    [
+extension MD5.Words {
+    @usableFromInline static let shifts: [Int] = [
         7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
         5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
         4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
         6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,
     ]
-    @usableFromInline static
-    let table:[UInt32] =
-    [
+    @usableFromInline static let table: [UInt32] = [
         0xd76a_a478, 0xe8c7_b756, 0x2420_70db, 0xc1bd_ceee,
         0xf57c_0faf, 0x4787_c62a, 0xa830_4613, 0xfd46_9501,
         0x6980_98d8, 0x8b44_f7af, 0xffff_5bb1, 0x895c_d7be,
@@ -80,31 +63,25 @@ extension MD5.Words
         0xf753_7e82, 0xbd3a_f235, 0x2ad7_d2bb, 0xeb86_d391,
     ]
 }
-extension MD5.Words
-{
-    @inlinable mutating
-    func update(with block:MD5.Block)
-    {
-        var a:UInt32 = self.a
-        var b:UInt32 = self.b
-        var c:UInt32 = self.c
-        var d:UInt32 = self.d
+extension MD5.Words {
+    @inlinable mutating func update(with block: MD5.Block) {
+        var a: UInt32 = self.a
+        var b: UInt32 = self.b
+        var c: UInt32 = self.c
+        var d: UInt32 = self.d
 
-        defer
-        {
+        defer {
             self.a &+= a
             self.b &+= b
             self.c &+= c
             self.d &+= d
         }
 
-        for i:Int in 0 ..< 64
-        {
-            let j:Int
-            let f:UInt32
+        for i: Int in 0 ..< 64 {
+            let j: Int
+            let f: UInt32
 
-            switch i
-            {
+            switch i {
             case  0 ..< 16:
                 j = i
                 f = (b & c) | (~b & d)
@@ -122,7 +99,7 @@ extension MD5.Words
                 f = c ^ (b | ~d)
             }
 
-            let g:UInt32 = a &+ f &+ Self.table[i] &+ block[j]
+            let g: UInt32 = a &+ f &+ Self.table[i] &+ block[j]
 
             a = d
             d = c
@@ -131,9 +108,7 @@ extension MD5.Words
         }
     }
 
-    @inlinable static
-    func rotate(_ value:UInt32, left shift:Int) -> UInt32
-    {
+    @inlinable static func rotate(_ value: UInt32, left shift: Int) -> UInt32 {
         (value << shift) | (value >> (UInt32.bitWidth - shift))
     }
 }

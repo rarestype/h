@@ -1,19 +1,18 @@
 import Base64
 
-extension Encoding
-{
-    struct TestCase
-    {
-        let name:String
-        let degenerate:String?
-        let canonical:String
-        let expected:[UInt8]
+extension Encoding {
+    struct TestCase {
+        let name: String
+        let degenerate: String?
+        let canonical: String
+        let expected: [UInt8]
 
-        init(name:String,
-            degenerate:String? = nil,
-            canonical:String,
-            expected:[UInt8])
-        {
+        init(
+            name: String,
+            degenerate: String? = nil,
+            canonical: String,
+            expected: [UInt8]
+        ) {
             self.name = name
             self.degenerate = degenerate
             self.canonical = canonical
@@ -21,26 +20,31 @@ extension Encoding
         }
     }
 }
-extension Encoding.TestCase
-{
-    init<UTF8>(name:String,
-        degenerate:String? = nil,
-        canonical:String,
-        expected:UTF8) where UTF8:Collection, UTF8.Element == UInt8
-    {
-        self.init(name: name,
+extension Encoding.TestCase {
+    init<UTF8>(
+        name: String,
+        degenerate: String? = nil,
+        canonical: String,
+        expected: UTF8
+    ) where UTF8: Collection, UTF8.Element == UInt8 {
+        self.init(
+            name: name,
             degenerate: degenerate,
             canonical: canonical,
-            expected: .init(expected))
+            expected: .init(expected)
+        )
     }
-    init(name:String,
-        degenerate:String? = nil,
-        canonical:String,
-        expected:String)
-    {
-        self.init(name: name,
+    init(
+        name: String,
+        degenerate: String? = nil,
+        canonical: String,
+        expected: String
+    ) {
+        self.init(
+            name: name,
             degenerate: degenerate,
             canonical: canonical,
-            expected: expected.utf8)
+            expected: expected.utf8
+        )
     }
 }
