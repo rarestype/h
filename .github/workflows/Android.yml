@@ -13,5 +13,5 @@ jobs:
             -   name: 💖 Checkout repository 💖
                 uses: actions/checkout@v6
 
-            -   name: 💖 "Run tests" 💖
+            -   name: 💖 Run tests 💖
                 uses: skiptools/swift-android-action@v2

@@ -23,6 +23,7 @@ The h library requires Swift 6.0 or later.
 | 🍏 Darwin (tvOS) | [![tvOS](https://github.com/rarestype/h/actions/workflows/tvOS.yml/badge.svg)](https://github.com/rarestype/h/actions/workflows/tvOS.yml) |
 | 🍏 Darwin (visionOS) | [![visionOS](https://github.com/rarestype/h/actions/workflows/visionOS.yml/badge.svg)](https://github.com/rarestype/h/actions/workflows/visionOS.yml) |
 | 🍏 Darwin (watchOS) | [![watchOS](https://github.com/rarestype/h/actions/workflows/watchOS.yml/badge.svg)](https://github.com/rarestype/h/actions/workflows/watchOS.yml) |
+| 🤖 Android | [![Tests](https://github.com/rarestype/h/actions/workflows/Android.yml/badge.svg)](https://github.com/rarestype/h/actions/workflows/Android.yml) |
 
 
 [Check deployment minimums](https://swiftinit.org/docs/h#ss:platform-requirements)
