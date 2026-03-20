@@ -8,10 +8,10 @@ on:
 
 jobs:
     build:
-    runs-on: ubuntu-latest
-    steps:
-        -   name: 💖 Checkout repository 💖
-            uses: actions/checkout@v6
+        runs-on: ubuntu-latest
+        steps:
+            -   name: 💖 Checkout repository 💖
+                uses: actions/checkout@v6
 
-        -   name: 💖 "Run tests" 💖
-            uses: skiptools/swift-android-action@v2
+            -   name: 💖 "Run tests" 💖
+                uses: skiptools/swift-android-action@v2
