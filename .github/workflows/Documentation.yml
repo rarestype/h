@@ -1,7 +1,7 @@
 # This workflow validates the package’s documentation. Because documentation building involves
 # compiling the package, this also checks that the package itself compiles successfully on each
 # supported platform.
-name: documentation
+name: Documentation
 
 on:
     push:
