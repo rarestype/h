@@ -14,15 +14,15 @@ an inline-only microframework of generic pure-swift hashes, checksums, and binar
 The h library requires Swift 6.0 or later.
 
 <!-- DO NOT EDIT BELOW! AUTOSYNC CONTENT [STATUS TABLE] -->
-| Platform | Build |
+| Platform | Status |
 | -------- | ------|
 | 💬 Documentation | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Documentation/_all/status.svg)](https://github.com/rarestype/h/actions/workflows/Documentation.yml) |
 | 🐧 Linux | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/Linux/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
-| 🍎 Darwin | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/macOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
-| 🍎 Darwin (iOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/iOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
-| 🍎 Darwin (tvOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/tvOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
-| 🍎 Darwin (visionOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/visionOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
-| 🍎 Darwin (watchOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/watchOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
+| 🍏 Darwin | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/macOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
+| 🍏 Darwin (iOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/iOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
+| 🍏 Darwin (tvOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/tvOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
+| 🍏 Darwin (visionOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/visionOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
+| 🍏 Darwin (watchOS) | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/watchOS/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
 | 🤖 Android | [![Status](https://raw.githubusercontent.com/rarestype/h/refs/badges/ci/Tests/Android/status.svg)](https://github.com/rarestype/h/actions/workflows/Tests.yml) |
 <!-- DO NOT EDIT ABOVE! AUTOSYNC CONTENT [STATUS TABLE] -->
 
