@@ -1,5 +1,7 @@
 name: Tests
 
+permissions:
+    contents: write
 on:
     push:
         branches: [ master ]
@@ -28,7 +30,7 @@ jobs:
         outputs:
             code_changed: ${{ steps.changes.outputs.any_changed }}
 
-    linux:
+    Linux:
         runs-on: ubuntu-24.04
         name: Ubuntu 24.04
         needs: changes
@@ -46,9 +48,12 @@ jobs:
             -   name: 💖 Run tests 💖
                 run: Scripts/TestAll
 
-    macos:
+            -   name: 💖 Update badge 💖
+                uses: rarestype/rarestbadge@v1
+                if: always()
+
+    macOS:
         runs-on: macos-26
-        name: macOS
         needs: changes
         if: ${{ needs.changes.outputs.code_changed == 'true' }}
         steps:
@@ -60,3 +65,35 @@ jobs:
 
             -   name: 💖 Run tests 💖
                 run: Scripts/TestAll
+
+            -   name: 💖 Update badge 💖
+                uses: rarestype/rarestbadge@v1
+                if: always()
+
+    macOS-devices:
+        strategy:
+            matrix:
+                destination: [iOS, tvOS, visionOS, watchOS]
+        needs: changes
+        if: ${{ needs.changes.outputs.code_changed == 'true' }}
+        name: ${{ matrix.destination }}
+        uses: rarestype/swift-device-action/.github/workflows/build.yml@v1
+        with:
+            xcode-scheme: 'h-Package'
+            destination: ${{ matrix.destination }}
+            badge-namespace: ${{ github.workflow }}
+
+    Android:
+        needs: changes
+        if: ${{ needs.changes.outputs.code_changed == 'true' }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: 💖 Checkout repository 💖
+                uses: actions/checkout@v6
+
+            -   name: 💖 Run tests 💖
+                uses: skiptools/swift-android-action@v2
+
+            -   name: 💖 Update badge 💖
+                uses: rarestype/rarestbadge@v1
+                if: always()
