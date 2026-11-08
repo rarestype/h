@@ -80,8 +80,9 @@ import MessageAuthentication
     ) where Chunk: Collection<UInt8> {
         assert(chunk.count == 64)
 
-        let schedule: [UInt32] = .init(unsafeUninitializedCapacity: 64) {
-            (buffer: inout UnsafeMutableBufferPointer<UInt32>, count: inout Int) in
+        let schedule: [UInt32] = .init(
+            unsafeUninitializedCapacity: 64
+        ) { (buffer: inout UnsafeMutableBufferPointer<UInt32>, count: inout Int) in
 
             count = 64
 

@@ -27,10 +27,8 @@ extension InlineBuffer {
 }
 extension InlineBuffer: Equatable {
     @inlinable public static func == (lhs: Self, rhs: Self) -> Bool {
-        withUnsafeBytes(of: lhs.storage) {
-            (lhs: UnsafeRawBufferPointer) in
-            withUnsafeBytes(of: rhs.storage) {
-                (rhs: UnsafeRawBufferPointer) in
+        withUnsafeBytes(of: lhs.storage) { (lhs: UnsafeRawBufferPointer) in
+            withUnsafeBytes(of: rhs.storage) { (rhs: UnsafeRawBufferPointer) in
                 lhs.elementsEqual(rhs)
             }
         }
@@ -45,10 +43,8 @@ extension InlineBuffer: Hashable {
 }
 extension InlineBuffer: Comparable {
     @inlinable public static func < (lhs: Self, rhs: Self) -> Bool {
-        withUnsafeBytes(of: lhs.storage) {
-            (lhs: UnsafeRawBufferPointer) in
-            withUnsafeBytes(of: rhs.storage) {
-                (rhs: UnsafeRawBufferPointer) in
+        withUnsafeBytes(of: lhs.storage) { (lhs: UnsafeRawBufferPointer) in
+            withUnsafeBytes(of: rhs.storage) { (rhs: UnsafeRawBufferPointer) in
                 lhs.lexicographicallyPrecedes(rhs)
             }
         }
@@ -73,20 +69,25 @@ extension InlineBuffer: RandomAccessCollection, MutableCollection {
 @available(macOS 13.3, iOS 16.4, macCatalyst 16.4, tvOS 16.4, visionOS 1, watchOS 9.4, *)
 extension InlineBuffer: ExpressibleByIntegerLiteral {
     @inlinable public init(integerLiteral: __shared StaticBigInt) {
-        precondition(integerLiteral.signum() >= 0, """
+        precondition(
+            integerLiteral.signum() >= 0,
+            """
             inline buffer literal cannot be negative
-            """)
+            """
+        )
         // +1 bit for “sign” bit
-        precondition(integerLiteral.bitWidth <= MemoryLayout<Storage>.size * 8 + 1, """
+        precondition(
+            integerLiteral.bitWidth <= MemoryLayout<Storage>.size * 8 + 1,
+            """
             inline buffer literal overflows UInt\(MemoryLayout<Storage>.size * 8) \
             (bit width: \(integerLiteral.bitWidth))
-            """)
+            """
+        )
 
         let storage: Storage = withUnsafeTemporaryAllocation(
             byteCount: MemoryLayout<Storage>.size,
             alignment: MemoryLayout<Storage>.alignment
-        ) {
-            (self: UnsafeMutableRawBufferPointer) in
+        ) { (self: UnsafeMutableRawBufferPointer) in
 
             var i: Int = MemoryLayout<Storage>.size
             for w: Int in 0... {
