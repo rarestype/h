@@ -3,8 +3,7 @@ import Base16
 /// The value of a [CRC32](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) checksum.
 @frozen public struct CRC32: Hashable, Sendable {
     @_documentation(visibility: internal)
-    public static let table: [UInt32] = (0 ..< 256).map {
-        (i: UInt32) in
+    public static let table: [UInt32] = (0 ..< 256).map { (i: UInt32) in
         (0 ..< 8).reduce(i){ (c, _) in (c & 1 * 0xed_b8_83_20) ^ c >> 1 }
     }
 
@@ -43,8 +42,7 @@ import Base16
 
     /// Updates the checksum by hashing the provided message into the existing checksum.
     @inlinable public mutating func update(with message: borrowing some Sequence<UInt8>) {
-        self.checksum = ~message.reduce(~self.checksum) {
-            (state: UInt32, byte: UInt8) in
+        self.checksum = ~message.reduce(~self.checksum) { (state: UInt32, byte: UInt8) in
             let indexByte: UInt8 = UInt8.init(truncatingIfNeeded: state) ^ byte
             let index: Int = Int.init(indexByte)
             return Self.table[index] ^ state >> 8

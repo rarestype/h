@@ -1,8 +1,7 @@
 import BaseDigits
 
 extension Base16 {
-    public enum LowercaseDigits {
-    }
+    public enum LowercaseDigits {}
 }
 extension Base16.LowercaseDigits: BaseDigits {
     @inlinable public static subscript(remainder: UInt8) -> UInt8 {
