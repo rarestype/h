@@ -36,10 +36,12 @@ extension UUID {
             .random(in: .min ... .max)
         )
         withUnsafeMutableBytes(of: &bitPattern) {
-            $0[6] = 0b0100_0000 |
-            0b0000_1111 & $0[6]
-            $0[8] = 0b1000_0000 |
-            0b0011_1111 & $0[8]
+            $0[6] =
+                0b0100_0000 |
+                0b0000_1111 & $0[6]
+            $0[8] =
+                0b1000_0000 |
+                0b0011_1111 & $0[8]
         }
         return .init(bitPattern: bitPattern)
     }
