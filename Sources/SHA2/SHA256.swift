@@ -45,8 +45,11 @@ import MessageAuthentication
 
         var blocks: Int = 0
         var start: Message.Index = message.startIndex
-        while let end: Message.Index =
-            message.index(start, offsetBy: 64, limitedBy: message.endIndex) {
+        while let end: Message.Index = message.index(
+                start,
+                offsetBy: 64,
+                limitedBy: message.endIndex
+            ) {
             self.update(with: message[start ..< end])
             blocks += 1
             start = end
