@@ -96,20 +96,22 @@ import MessageAuthentication
                 let b: Chunk.Index = chunk.index(after: c)
                 let a: Chunk.Index = chunk.index(after: b)
                 buffer[i] =
-                UInt32.init(chunk[base])    << 24 |
-                UInt32.init(chunk[c])       << 16 |
-                UInt32.init(chunk[b])       <<  8 |
-                UInt32.init(chunk[a])
+                    UInt32.init(chunk[base])    << 24 |
+                    UInt32.init(chunk[c])       << 16 |
+                    UInt32.init(chunk[b])       <<  8 |
+                    UInt32.init(chunk[a])
                 base = chunk.index(after: a)
             }
             for i: Int in 16 ..< count {
                 let s: (UInt32, UInt32)
-                s.0             =   Self.rotate(buffer[i - 15], right: 7) ^
-                Self.rotate(buffer[i - 15], right: 18) ^
-                (buffer[i - 15] >>  3 as UInt32)
-                s.1             =   Self.rotate(buffer[i -  2], right: 17) ^
-                Self.rotate(buffer[i -  2], right: 19) ^
-                (buffer[i -  2] >> 10 as UInt32)
+                s.0             =
+                    Self.rotate(buffer[i - 15], right: 7) ^
+                    Self.rotate(buffer[i - 15], right: 18) ^
+                    (buffer[i - 15] >>  3 as UInt32)
+                s.1             =
+                    Self.rotate(buffer[i -  2], right: 17) ^
+                    Self.rotate(buffer[i -  2], right: 19) ^
+                    (buffer[i -  2] >> 10 as UInt32)
                 let t: UInt32    =   s.0 &+ s.1
                 buffer[i]       = buffer[i - 16] &+ buffer[i - 7] &+ t
             }
@@ -119,12 +121,14 @@ import MessageAuthentication
 
         for i: Int in 0 ..< 64 {
             let s: (UInt32, UInt32)
-            s.1     =   Self.rotate(e, right: 6) ^
-            Self.rotate(e, right: 11) ^
-            Self.rotate(e, right: 25)
-            s.0     =   Self.rotate(a, right: 2) ^
-            Self.rotate(a, right: 13) ^
-            Self.rotate(a, right: 22)
+            s.1     =
+                Self.rotate(e, right: 6) ^
+                Self.rotate(e, right: 11) ^
+                Self.rotate(e, right: 25)
+            s.0     =
+                Self.rotate(a, right: 2) ^
+                Self.rotate(a, right: 13) ^
+                Self.rotate(a, right: 22)
             let ch: UInt32   = (e & f) ^ (~e & g)
             let temp: (UInt32, UInt32)
             temp.0          = h &+ s.1 &+ ch &+ Self.table[i] &+ schedule[i]
